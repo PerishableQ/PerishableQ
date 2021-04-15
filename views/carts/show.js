@@ -19,7 +19,7 @@ module.exports = ({items}) => {
           </div>
           <div class="remove">
             <form method="POST" action="/cart/products/delete">
-                <input type="hidden" value="${item.id} name="itemId" />
+                <input type="hidden" value="${item.id}" name="itemId" />
                 <button class="button is-danger">                  
                     <span class="icon is-small">
                     <i class="fas fa-times"></i>

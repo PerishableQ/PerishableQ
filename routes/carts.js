@@ -6,6 +6,7 @@ const cartShowTemplate = require('../views/carts/show');
 const router = express.Router();
 
 router.post('/cart/products', async (req, res) => {
+    // create
     let cart;
     if (!req.session.cartId) {
         cart = await cartsRepo.create({items: []});
@@ -14,7 +15,6 @@ router.post('/cart/products', async (req, res) => {
         cart = await cartsRepo.getOne(req.session.cartId);
     }
     const existingItem = cart.items.find(item => item.id === req.body.productId);
-    console.log(req.body)
     if (existingItem) {
         existingItem.quantity++;
     } else {
@@ -25,7 +25,7 @@ router.post('/cart/products', async (req, res) => {
         items: cart.items
     });
 
-    res.redirect('/cart');
+    res.send('Product added to cart');
 })
 
 router.get('/cart', async (req, res) => {
@@ -46,9 +46,7 @@ router.get('/cart', async (req, res) => {
 
 router.post('/cart/products/delete', async (req, res) => {
     const {itemId} = req.body;
-    console.log(req.body)
     const cart = await cartsRepo.getOne(req.session.cartId);
-    console.log(cart)
     const items = cart.items.filter(item => item.id !== itemId);
 
     await cartsRepo.update(req.session.cartId, {items});
