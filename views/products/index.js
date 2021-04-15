@@ -23,9 +23,8 @@ module.exports = ({ products }) => {
                 </footer>
             </div>
         </div>
-    `;
-		})
-		.join("\n");
+        `;
+		}).join("\n");
 
 	return layout({
 		content: `
